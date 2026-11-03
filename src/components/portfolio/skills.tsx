@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { marqueeTech, skills } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { SectionHeading } from "./section-heading"
 
 function SkillBar({
@@ -53,7 +53,9 @@ function SkillBar({
 }
 
 export function Skills() {
-  const [tab, setTab] = useState(skills[0].category)
+  const { skills, marqueeTech } = useSiteContent()
+  const [tab, setTab] = useState<string | null>(null)
+  const activeTab = tab ?? skills[0]?.category ?? ""
 
   return (
     <section id="skills" className="relative scroll-mt-24 px-4 py-24">
@@ -69,7 +71,7 @@ export function Skills() {
           description="The stack I reach for daily — depth where it matters, breadth where it helps."
         />
 
-        <Tabs value={tab} onValueChange={(v) => setTab(v as typeof tab)}>
+        <Tabs value={activeTab} onValueChange={(v) => setTab(v)}>
           <TabsList className="mx-auto mb-8 grid w-full max-w-md grid-cols-3">
             {skills.map((group) => (
               <TabsTrigger key={group.category} value={group.category}>
@@ -85,7 +87,7 @@ export function Skills() {
               </p>
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={tab}
+                  key={activeTab}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -14 }}

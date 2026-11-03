@@ -22,7 +22,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Akash Kushwaha — Full-Stack Developer Portfolio",
   description:
-    "Portfolio of Akash Kushwaha — a Computer Science (AI) undergrad at NIET with 400+ LeetCode problems solved in Java. Full-stack projects with React, Next.js, Node.js, MongoDB, TensorFlow and the Gemini API.",
+    "Portfolio of Akash Kushwaha — a Computer Science (AI) undergrad at NIET with 400+ LeetCode problems solved in Java. Full-stack projects with React, Node.js, Express.js, MongoDB and the Google Gemini API. Based in Sasni, Hathras, Uttar Pradesh, India.",
   keywords: [
     "Akash Kushwaha",
     "portfolio",
@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     "artificial intelligence",
     "LeetCode",
     "DSA",
+    "Java",
     "React",
     "Next.js",
     "MERN",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Akash Kushwaha — Full-Stack Developer Portfolio",
     description:
-      "Skills, projects and learning journey of an AI-focused full-stack developer.",
+      "Skills, projects and learning journey of an AI-focused full-stack developer from Hathras, Uttar Pradesh, India.",
     siteName: "Akash Kushwaha Portfolio",
     type: "website",
   },

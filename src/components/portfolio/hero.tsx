@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import {
   ArrowRight,
+  Code2,
   Copy,
   Download,
   FolderGit2,
@@ -13,20 +14,26 @@ import {
   Twitter,
 } from "lucide-react"
 import { toast } from "sonner"
-import { profile } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { CountUp, useTypewriter } from "./hooks"
 
-const socialIcons = { github: Github, linkedin: Linkedin, twitter: Twitter }
-
-function copyEmail() {
-  navigator.clipboard
-    .writeText(profile.email)
-    .then(() => toast.success("Email copied — talk soon!"))
-    .catch(() => toast.error("Could not copy email"))
+const socialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  leetcode: Code2,
 }
 
 export function Hero() {
+  const { profile } = useSiteContent()
   const typed = useTypewriter(profile.roles)
+
+  const copyEmail = () => {
+    navigator.clipboard
+      .writeText(profile.email)
+      .then(() => toast.success("Email copied — talk soon!"))
+      .catch(() => toast.error("Could not copy email"))
+  }
 
   const scrollTo = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })

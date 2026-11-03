@@ -4,11 +4,13 @@ import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Command, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { navLinks, profile, type SectionId } from "@/lib/portfolio-data"
+import { navLinks, type SectionId } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { ThemeToggle } from "./theme-toggle"
 import { openCommandPalette } from "./command-palette"
 
 export function Navbar() {
+  const { profile } = useSiteContent()
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState<SectionId | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)

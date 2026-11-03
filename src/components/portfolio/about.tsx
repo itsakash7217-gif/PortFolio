@@ -1,18 +1,24 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Coffee, Compass, Globe, Mail, Rocket, Wrench } from "lucide-react"
-import { profile } from "@/lib/portfolio-data"
+import { Compass, Globe, GraduationCap, Mail, Rocket, Wrench } from "lucide-react"
+import { useSiteContent } from "./content-provider"
 import { SectionHeading } from "./section-heading"
 
-const facts = [
-  { icon: Globe, label: "Based in", value: profile.location },
-  { icon: Mail, label: "Email", value: profile.email },
-  { icon: Coffee, label: "Fuel", value: "Chai & curiosity" },
-  { icon: Compass, label: "Focus", value: "AI, DSA & full-stack" },
-]
-
 export function About() {
+  const { profile } = useSiteContent()
+
+  const facts = [
+    { icon: Globe, label: "Based in", value: profile.location },
+    { icon: Mail, label: "Email", value: profile.email },
+    {
+      icon: GraduationCap,
+      label: "Education",
+      value: "B.Tech CSE (AI) · NIET · 2027",
+    },
+    { icon: Compass, label: "Focus", value: "AI, DSA & full-stack" },
+  ]
+
   return (
     <section id="about" className="relative scroll-mt-24 px-4 py-24">
       <div className="mx-auto max-w-6xl">

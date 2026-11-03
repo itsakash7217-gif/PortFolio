@@ -1,12 +1,20 @@
 "use client"
 
-import { ArrowUp, Command, Github, Linkedin, Twitter } from "lucide-react"
-import { navLinks, profile } from "@/lib/portfolio-data"
+import { ArrowUp, Code2, Command, Github, Linkedin, Twitter } from "lucide-react"
+import Link from "next/link"
+import { navLinks } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { openCommandPalette } from "./command-palette"
 
-const socialIcons = { github: Github, linkedin: Linkedin, twitter: Twitter }
+const socialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  leetcode: Code2,
+}
 
 export function Footer() {
+  const { profile } = useSiteContent()
   const jump = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })
 
@@ -91,6 +99,12 @@ export function Footer() {
             >
               Back to top <ArrowUp className="size-3.5" />
             </button>
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 transition-colors hover:border-primary/50 hover:text-primary"
+            >
+              Site admin
+            </Link>
           </div>
         </div>
       </div>

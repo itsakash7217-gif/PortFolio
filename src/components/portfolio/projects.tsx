@@ -10,20 +10,10 @@ import {
 } from "framer-motion"
 import { ExternalLink, Github, Heart, Zap } from "lucide-react"
 import { toast } from "sonner"
-import {
-  projects,
-  type ProjectCategory,
-} from "@/lib/portfolio-data"
+import type { Project } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { cn } from "@/lib/utils"
 import { SectionHeading } from "./section-heading"
-
-const filters: ("All" | ProjectCategory)[] = [
-  "All",
-  "Web App",
-  "AI / ML",
-  "Data & Analytics",
-  "Deep Learning",
-]
 
 const LIKED_KEY = "portfolio.likedProjects"
 
@@ -43,7 +33,7 @@ function ProjectCard({
   onLike,
   index,
 }: {
-  project: (typeof projects)[number]
+  project: Project
   likes: number
   liked: boolean
   onLike: (id: string) => void
@@ -223,9 +213,13 @@ function ProjectCard({
 }
 
 export function Projects() {
-  const [filter, setFilter] = useState<(typeof filters)[number]>("All")
+  const { projects } = useSiteContent()
+  const [filter, setFilter] = useState<string>("All")
   const [likes, setLikes] = useState<Record<string, number>>({})
   const [likedIds, setLikedIds] = useState<Set<string>>(new Set())
+
+  // Categories derived from the live project list (adapts to admin edits).
+  const filters = ["All", ...Array.from(new Set(projects.map((p) => p.category)))]
 
   useEffect(() => {
     setLikedIds(new Set(readLiked()))

@@ -21,3 +21,10 @@ model ProjectLike {
   count     Int      @default(0)
   updatedAt DateTime @updatedAt
 }
+
+/// Editable portfolio content (JSON blob written by the /admin panel)
+model SiteContent {
+  id        String   @id @default("main")
+  data      String
+  updatedAt DateTime @updatedAt
+}

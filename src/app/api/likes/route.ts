@@ -1,29 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { projects } from "@/lib/portfolio-data";
+import { getSiteContent } from "@/lib/site-content";
 
 /** GET → { likes: Record<projectId, count> } (seeds baseline counts on first call) */
 export async function GET() {
   try {
+    const content = await getSiteContent();
     const rows = await db.projectLike.findMany();
+
+    const likesMap = (list: { projectId: string; count: number }[]) =>
+      Object.fromEntries(list.map((r) => [r.projectId, r.count]));
 
     // Seed baseline like counts for known projects the first time.
     if (rows.length === 0) {
       await db.projectLike.createMany({
-        data: projects.map((p) => ({
+        data: content.projects.map((p) => ({
           projectId: p.id,
           count: p.initialLikes,
         })),
       });
       const seeded = await db.projectLike.findMany();
-      return NextResponse.json({
-        likes: Object.fromEntries(seeded.map((r) => [r.projectId, r.count])),
-      });
+      return NextResponse.json({ likes: likesMap(seeded) });
     }
 
-    return NextResponse.json({
-      likes: Object.fromEntries(rows.map((r) => [r.projectId, r.count])),
-    });
+    // New project added later via /admin? Seed just the missing rows.
+    const known = new Set(rows.map((r) => r.projectId));
+    const missing = content.projects.filter((p) => !known.has(p.id));
+    if (missing.length > 0) {
+      await db.projectLike.createMany({
+        data: missing.map((p) => ({ projectId: p.id, count: p.initialLikes })),
+      });
+      const refreshed = await db.projectLike.findMany();
+      return NextResponse.json({ likes: likesMap(refreshed) });
+    }
+
+    return NextResponse.json({ likes: likesMap(rows) });
   } catch (err) {
     console.error("[likes] failed to read likes", err);
     return NextResponse.json({ likes: {} }, { status: 500 });
@@ -37,7 +48,8 @@ export async function POST(req: NextRequest) {
     const projectId =
       typeof body?.projectId === "string" ? body.projectId : null;
 
-    const known = projects.some((p) => p.id === projectId);
+    const content = await getSiteContent();
+    const known = content.projects.some((p) => p.id === projectId);
     if (!projectId || !known) {
       return NextResponse.json(
         { ok: false, error: "Unknown project" },

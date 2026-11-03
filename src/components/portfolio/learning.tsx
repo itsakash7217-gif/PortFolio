@@ -2,11 +2,13 @@
 
 import { motion } from "framer-motion"
 import { BookOpen, GraduationCap, Sparkles } from "lucide-react"
-import { currentlyLearning, timeline } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { cn } from "@/lib/utils"
 import { SectionHeading } from "./section-heading"
 
 export function Learning() {
+  const { currentlyLearning, timeline } = useSiteContent()
+
   return (
     <section id="learning" className="relative scroll-mt-24 px-4 py-24">
       <div className="mx-auto max-w-5xl">
@@ -17,7 +19,7 @@ export function Learning() {
         />
 
         {/* Currently learning */}
-        <div className="mb-14 grid gap-4 sm:grid-cols-3">
+        <div className="mb-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {currentlyLearning.map((item, i) => (
             <motion.div
               key={item.name}

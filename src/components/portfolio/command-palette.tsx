@@ -4,11 +4,13 @@ import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
   ArrowRight,
+  Code2,
   Copy,
   Download,
   Github,
   Linkedin,
   Moon,
+  Settings2,
   Sun,
   Twitter,
   User,
@@ -30,7 +32,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command"
-import { profile } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 
 const OPEN_EVENT = "portfolio:open-command-palette"
 
@@ -38,9 +40,17 @@ export function openCommandPalette() {
   window.dispatchEvent(new CustomEvent(OPEN_EVENT))
 }
 
+const linkIcons: Record<string, typeof Github> = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  leetcode: Code2,
+}
+
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
+  const { profile } = useSiteContent()
   const router = useRouter()
 
   useEffect(() => {
@@ -70,7 +80,7 @@ export function CommandPalette() {
       .writeText(profile.email)
       .then(() => toast.success("Email copied to clipboard"))
       .catch(() => toast.error("Could not copy email"))
-  }, [])
+  }, [profile.email])
 
   const toggleTheme = useCallback(() => {
     setOpen(false)
@@ -130,28 +140,34 @@ export function CommandPalette() {
           <CommandItem onSelect={run(copyEmail)}>
             <Copy className="mr-2 size-4" /> Copy email address
           </CommandItem>
+          <CommandItem
+            onSelect={() => {
+              setOpen(false)
+              router.push("/admin")
+            }}
+          >
+            <Settings2 className="mr-2 size-4" /> Open admin panel (edit content)
+            <ArrowRight className="ml-auto size-3 opacity-50" />
+          </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Links">
-          {profile.socials.map((s) => (
-            <CommandItem
-              key={s.label}
-              onSelect={() => {
-                setOpen(false)
-                window.open(s.url, "_blank", "noopener,noreferrer")
-              }}
-            >
-              {s.icon === "github" ? (
-                <Github className="mr-2 size-4" />
-              ) : s.icon === "linkedin" ? (
-                <Linkedin className="mr-2 size-4" />
-              ) : (
-                <Twitter className="mr-2 size-4" />
-              )}
-              {s.label}
-              <ArrowRight className="ml-auto size-3 opacity-50" />
-            </CommandItem>
-          ))}
+          {profile.socials.map((s) => {
+            const Icon = linkIcons[s.icon] ?? Code2
+            return (
+              <CommandItem
+                key={s.label}
+                onSelect={() => {
+                  setOpen(false)
+                  window.open(s.url, "_blank", "noopener,noreferrer")
+                }}
+              >
+                <Icon className="mr-2 size-4" />
+                {s.label}
+                <ArrowRight className="ml-auto size-3 opacity-50" />
+              </CommandItem>
+            )
+          })}
           <CommandItem
             onSelect={() => {
               setOpen(false)

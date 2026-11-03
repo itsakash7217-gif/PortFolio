@@ -3,24 +3,32 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import {
+  Code2,
   Copy,
   Github,
   Linkedin,
   Loader2,
   Mail,
   MapPin,
+  Phone,
   Send,
   Twitter,
 } from "lucide-react"
 import { toast } from "sonner"
-import { profile } from "@/lib/portfolio-data"
+import { useSiteContent } from "./content-provider"
 import { SectionHeading } from "./section-heading"
 
-const socialIcons = { github: Github, linkedin: Linkedin, twitter: Twitter }
+const socialIcons = {
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  leetcode: Code2,
+}
 
 type Status = "idle" | "sending" | "sent"
 
 export function Contact() {
+  const { profile } = useSiteContent()
   const [status, setStatus] = useState<Status>("idle")
   const [error, setError] = useState<string | null>(null)
 
@@ -116,11 +124,30 @@ export function Contact() {
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="grid size-9 place-items-center rounded-lg bg-primary/10 text-primary">
-                    <MapPin className="size-4" />
+                    <Phone className="size-4" />
                   </span>
                   <div>
+                    <p className="text-xs text-muted-foreground">Phone</p>
+                    <a
+                      href={`tel:${profile.phone.replace(/\s+/g, "")}`}
+                      className="text-sm font-semibold transition-colors hover:text-primary"
+                    >
+                      {profile.phone}
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="grid size-9 place-items-center rounded-lg bg-primary/10 text-primary">
+                    <MapPin className="size-4" />
+                  </span>
+                  <div className="min-w-0">
                     <p className="text-xs text-muted-foreground">Location</p>
                     <p className="text-sm font-semibold">{profile.location}</p>
+                    {profile.address ? (
+                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                        {profile.address}
+                      </p>
+                    ) : null}
                   </div>
                 </li>
               </ul>
