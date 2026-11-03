@@ -22,20 +22,37 @@ def heading(text, y):
     c.setFont("Helvetica-Bold", 21)
     c.setFillColor(INK)
     c.drawString(M, y, text)
-    c.setFont("Helvetica", 9.5)
+
+    def row(items_y, parts, gap=5):
+        """Draw parts left-to-right, alternating muted/accent, measured widths."""
+        x = M
+        for i, (txt, accent) in enumerate(parts):
+            c.setFont("Helvetica", 9.2)
+            c.setFillColor(ACCENT if accent else MUTED)
+            c.drawString(x, items_y, txt)
+            x += c.stringWidth(txt, "Helvetica", 9.2)
+            if i < len(parts) - 1:
+                x += gap * mm
+        return items_y
+
+    c.setFont("Helvetica", 9.2)
     c.setFillColor(MUTED)
     y -= 6 * mm
-    c.drawString(
-        M, y,
-        "Full-Stack Developer & AI Enthusiast  ·  its.akash.k7217@gmail.com  ·  Meerut, India",
-    )
-    y -= 4.8 * mm
-    c.setFillColor(ACCENT)
-    c.drawString(M, y, "github.com/itsakash7217-gif")
+    y = row(y, [
+        ("Full-Stack Developer & AI Enthusiast", False),
+        ("its.akash.k7217@gmail.com", False),
+        ("+91 96900 94788", False),
+    ], gap=7)
+    y -= 4.6 * mm
     c.setFillColor(MUTED)
-    c.drawString(58 * mm, y, "·")
-    c.drawString(63 * mm, y, "linkedin.com/in/akash-kushwaha-2a11b6323")
-    return y - 4 * mm
+    c.drawString(M, y, "Sasni, Hathras, Uttar Pradesh 204216, India")
+    y -= 4.6 * mm
+    y = row(y, [
+        ("github.com/itsakash7217-gif", True),
+        ("linkedin.com/in/akash_kushwaha-498a23376", True),
+        ("leetcode.com/u/Akash_Kushwhaha", True),
+    ], gap=8)
+    return y - 3 * mm
 
 def section(title, y):
     y -= 5.5 * mm
@@ -73,7 +90,7 @@ y = para(
 )
 
 y = section("Projects", y)
-y = para("Resume Analyzer  |  React, TypeScript, Tailwind CSS, Python, Gemini 2.5 API", y, bold=True)
+y = para("Resume Analyzer  |  React, Tailwind CSS, Node.js, Express.js, MongoDB, Gemini API", y, bold=True)
 y = para(
     "AI-powered application that analyzes resumes, generates ATS scores, identifies skill gaps,\n"
     "recommends suitable jobs and provides improvement suggestions.",
@@ -86,27 +103,13 @@ y = para(
     "rental operations.",
     y,
 )
-y -= 1.2 * mm
-y = para("Sales Performance Analysis Dashboard  |  Python, Streamlit, Pandas, Plotly", y, bold=True)
-y = para(
-    "Interactive dashboard for analyzing sales data, tracking business performance and\n"
-    "visualizing insights.",
-    y,
-)
-y -= 1.2 * mm
-y = para("Voice Emotion Detection  |  Python, TensorFlow, Librosa, LSTM", y, bold=True)
-y = para(
-    "Deep learning project that detects human emotions from voice signals using audio\n"
-    "processing and neural networks.",
-    y,
-)
 
 y = section("Skills", y)
 y = para(
-    "Languages:  Java, Python, JavaScript, TypeScript\n"
+    "Languages:  Java, JavaScript, TypeScript, SQL\n"
     "Frontend:  React.js, Next.js, Tailwind CSS, HTML/CSS\n"
     "Backend & Data:  Node.js, Express.js, MongoDB, REST APIs\n"
-    "AI & Tools:  TensorFlow, LSTM, Librosa, Pandas, Plotly, Streamlit, Gemini API, Git & GitHub\n"
+    "AI & Tools:  Gemini API / Generative AI, Git & GitHub\n"
     "Core:  Data Structures & Algorithms, OOP, Problem Solving",
     y,
 )
