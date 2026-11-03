@@ -62,7 +62,7 @@ export function Navbar() {
           aria-label="Back to top"
         >
           <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-violet-600 via-fuchsia-500 to-amber-400 font-[family-name:var(--font-space-grotesk)] text-sm font-bold text-white shadow-md transition-transform group-hover:scale-105">
-            AC
+            {profile.initials}
           </span>
           <span className="hidden font-[family-name:var(--font-space-grotesk)] text-sm font-semibold sm:block">
             {profile.name}
@@ -116,7 +116,7 @@ export function Navbar() {
           <ThemeToggle />
           <a
             href={profile.resumeUrl}
-            download="Alex-Carter-Resume.pdf"
+            download={profile.resumeName}
             className="hidden rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500 px-4 py-1.5 text-sm font-semibold text-white shadow-md shadow-fuchsia-500/25 transition-transform hover:scale-105 md:block"
           >
             Résumé
@@ -157,7 +157,7 @@ export function Navbar() {
                 <li className="mt-1 border-t border-border pt-2">
                   <a
                     href={profile.resumeUrl}
-                    download="Alex-Carter-Resume.pdf"
+                    download={profile.resumeName}
                     onClick={() => setMenuOpen(false)}
                     className="block w-full rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 px-4 py-2.5 text-center text-sm font-semibold text-white"
                   >

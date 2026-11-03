@@ -20,27 +20,29 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Carter — Full-Stack Developer Portfolio",
+  title: "Akash Kushwaha — Full-Stack Developer Portfolio",
   description:
-    "Interactive portfolio showcasing skills, projects and the learning journey of Alex Carter, a full-stack developer. Built with Next.js, TypeScript, Tailwind CSS and Framer Motion.",
+    "Portfolio of Akash Kushwaha — a Computer Science (AI) undergrad at NIET with 400+ LeetCode problems solved in Java. Full-stack projects with React, Next.js, Node.js, MongoDB, TensorFlow and the Gemini API.",
   keywords: [
+    "Akash Kushwaha",
     "portfolio",
     "full-stack developer",
-    "Next.js",
-    "TypeScript",
+    "artificial intelligence",
+    "LeetCode",
+    "DSA",
     "React",
-    "projects",
-    "skills",
+    "Next.js",
+    "MERN",
   ],
-  authors: [{ name: "Alex Carter" }],
+  authors: [{ name: "Akash Kushwaha" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Alex Carter — Full-Stack Developer Portfolio",
+    title: "Akash Kushwaha — Full-Stack Developer Portfolio",
     description:
-      "Skills, projects and learning journey with interactive visual effects.",
-    siteName: "Alex Carter Portfolio",
+      "Skills, projects and learning journey of an AI-focused full-stack developer.",
+    siteName: "Akash Kushwaha Portfolio",
     type: "website",
   },
 };

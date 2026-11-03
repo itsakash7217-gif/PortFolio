@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion"
-import { ExternalLink, Github, Heart, Star } from "lucide-react"
+import { ExternalLink, Github, Heart, Zap } from "lucide-react"
 import { toast } from "sonner"
 import {
   projects,
@@ -21,8 +21,8 @@ const filters: ("All" | ProjectCategory)[] = [
   "All",
   "Web App",
   "AI / ML",
-  "Open Source",
-  "Mobile",
+  "Data & Analytics",
+  "Deep Learning",
 ]
 
 const LIKED_KEY = "portfolio.likedProjects"
@@ -111,9 +111,9 @@ function ProjectCard({
           <span className="absolute left-3 top-3 rounded-full bg-black/30 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
             {project.category}
           </span>
-          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/30 px-2.5 py-1 text-[11px] font-semibold text-amber-300 backdrop-blur-sm">
-            <Star className="size-3 fill-current" />
-            {(project.stars / 1000).toFixed(1)}k
+          <span className="absolute right-3 top-3 inline-flex max-w-[55%] items-center gap-1 truncate rounded-full bg-black/30 px-2.5 py-1 text-[11px] font-semibold text-amber-300 backdrop-blur-sm">
+            <Zap className="size-3 shrink-0 fill-current" />
+            {project.highlight}
           </span>
           <span className="shine-wrap absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
@@ -181,24 +181,39 @@ function ProjectCard({
             </button>
 
             <div className="flex items-center gap-1.5">
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} source code on GitHub`}
-                className="grid size-8 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
-              >
-                <Github className="size-4" />
-              </a>
-              <a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
-              >
-                Live demo
-                <ExternalLink className="size-3.5" />
-              </a>
+              {project.demoUrl === project.repoUrl ? (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} source code on GitHub`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+                >
+                  <Github className="size-3.5" />
+                  View code
+                </a>
+              ) : (
+                <>
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${project.title} source code on GitHub`}
+                    className="grid size-8 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                  >
+                    <Github className="size-4" />
+                  </a>
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+                  >
+                    Live demo
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>

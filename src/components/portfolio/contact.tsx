@@ -130,7 +130,7 @@ export function Contact() {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {profile.socials.map((s, i) => {
                 const Icon = socialIcons[s.icon as keyof typeof socialIcons]
                 return (

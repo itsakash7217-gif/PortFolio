@@ -68,7 +68,7 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-70" />
               <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
             </span>
-            Available for new opportunities
+            Open to internships & opportunities
           </motion.div>
 
           <div className="space-y-2">
@@ -130,7 +130,7 @@ export function Hero() {
             </button>
             <a
               href={profile.resumeUrl}
-              download="Alex-Carter-Resume.pdf"
+              download={profile.resumeName}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-6 py-3 text-sm font-semibold backdrop-blur transition-colors hover:border-primary/60 hover:text-primary"
             >
               <Download className="size-4" />
@@ -184,7 +184,7 @@ export function Hero() {
                 <span className="size-3 rounded-full bg-amber-400/80" />
                 <span className="size-3 rounded-full bg-emerald-500/80" />
                 <span className="ml-3 font-[family-name:var(--font-mono)] text-xs text-muted-foreground">
-                  alex.ts — profile
+                  akash.ts — profile
                 </span>
               </div>
               <pre className="overflow-hidden p-5 font-[family-name:var(--font-mono)] text-[13px] leading-6">
@@ -196,23 +196,23 @@ export function Hero() {
                   {"\n  "}
                   <span className="text-violet-400">name</span>
                   <span className="text-muted-foreground">:</span>{" "}
-                  <span className="text-emerald-500">&quot;Alex Carter&quot;</span>
+                  <span className="text-emerald-500">&quot;Akash Kushwaha&quot;</span>
                   <span className="text-muted-foreground">,</span>
                   {"\n  "}
                   <span className="text-violet-400">stack</span>
                   <span className="text-muted-foreground">:</span>{" "}
                   <span className="text-zinc-400">[</span>
+                  <span className="text-emerald-500">&quot;Java&quot;</span>
+                  <span className="text-muted-foreground">,</span>{" "}
                   <span className="text-emerald-500">&quot;TS&quot;</span>
                   <span className="text-muted-foreground">,</span>{" "}
                   <span className="text-emerald-500">&quot;React&quot;</span>
-                  <span className="text-muted-foreground">,</span>{" "}
-                  <span className="text-emerald-500">&quot;Node&quot;</span>
                   <span className="text-zinc-400">]</span>
                   <span className="text-muted-foreground">,</span>
                   {"\n  "}
                   <span className="text-violet-400">focus</span>
                   <span className="text-muted-foreground">:</span>{" "}
-                  <span className="text-emerald-500">&quot;craft &amp; performance&quot;</span>
+                  <span className="text-emerald-500">&quot;AI · DSA · full-stack&quot;</span>
                   <span className="text-muted-foreground">,</span>
                   {"\n  "}
                   <span className="text-violet-400">coffee</span>
@@ -244,8 +244,8 @@ export function Hero() {
               <Sparkles className="size-5" />
             </span>
             <div>
-              <p className="text-xs text-muted-foreground">Currently exploring</p>
-              <p className="text-sm font-semibold">AI Agents &amp; RAG systems</p>
+              <p className="text-xs text-muted-foreground">Currently learning</p>
+              <p className="text-sm font-semibold">MERN stack &amp; Generative AI</p>
             </div>
           </motion.div>
         </motion.div>

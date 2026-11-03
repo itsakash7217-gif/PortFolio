@@ -1,6 +1,6 @@
-# 🚀 Alex Carter — Interactive Developer Portfolio
+# 🚀 Akash Kushwaha — Interactive Developer Portfolio
 
-A modern, single-page developer portfolio that showcases **skills, projects and a learning journey** with rich visual effects and genuinely **actionable features** — live database-backed likes, a working contact form, a command palette, and a downloadable résumé.
+A modern, single-page developer portfolio for **Akash Kushwaha** — a Computer Science (AI) undergrad at NIET, Greater Noida — showcasing **skills, projects and a learning journey** with rich visual effects and genuinely **actionable features**: live database-backed likes, a working contact form, a command palette, and a downloadable résumé.
 
 Built with **Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · shadcn/ui · Framer Motion · Prisma + SQLite**.
 
@@ -194,18 +194,21 @@ sqlite3 db/custom.db "SELECT * FROM ContactMessage ORDER BY createdAt DESC;"
 
 ---
 
-## 🎨 Make it yours (3 steps)
+## 🎨 Personalized content — where it lives
 
-1. **Content** — open [`src/lib/portfolio-data.ts`](../src/lib/portfolio-data.ts) and edit:
-   - `profile` — name, roles (for the typewriter), tagline, bio, email, socials, stats
-   - `skills` / `marqueeTech` — categories, levels, notes
-   - `projects` — title, description, tech, links, emoji, gradient, initial like counts
-   - `timeline` / `currentlyLearning` — your journey and what you're studying now
-   - `navLinks` — section labels
+All of Akash's content is centralized in [`src/lib/portfolio-data.ts`](../src/lib/portfolio-data.ts):
 
-2. **Résumé** — replace `public/resume.pdf` with your own PDF (keep the same filename, or update `resumeUrl` in the data file).
+- `profile` — name, typewriter roles, tagline, bio (AI + 400+ LeetCode), email, GitHub/LinkedIn, stats
+- `skills` / `marqueeTech` — Java, Python, JS/TS, React, Node.js, MongoDB, TensorFlow & more
+- `projects` — Resume Analyzer, Bike Rental System, Sales Dashboard, Voice Emotion Detection (add `demoUrl`/`repoUrl` per project once live links exist)
+- `timeline` — B.Tech CSE (AI) @ NIET (2023–2027), SIH, 400+ LeetCode milestone, certifications
+- `currentlyLearning` — React/Next.js, Node/Express/MongoDB, AI-ML & Generative AI
 
-3. **Colors** — theme tokens live in `src/app/globals.css` (`:root` for light, `.dark` for dark). The accent gradient (`violet → fuchsia → amber`) is defined in the `text-gradient` utility and gradient classes in the components.
+Other assets:
+
+1. **Résumé** — `public/resume.pdf` is generated from `scripts/make_resume.py` (`python3 scripts/make_resume.py`). Replace that file with your own PDF anytime (keep the filename, or update `resumeUrl` in the data file).
+2. **Colors** — theme tokens live in `src/app/globals.css` (`:root` for light, `.dark` for dark). The accent gradient (violet → fuchsia → amber) is in the `text-gradient` utility.
+3. **Browser tab title & SEO** — `metadata` in `src/app/layout.tsx`.
 
 **Hot tip:** everything hot-reloads — edit the data file and watch the site update instantly while `bun run dev` is running.
 
@@ -233,7 +236,7 @@ vercel          # follow the prompts
 Checklist before deploying:
 
 - [ ] Set `DATABASE_URL` in your hosting env vars (use `file:./db/custom.db` or switch `prisma/schema.prisma` provider to Postgres for a serverless-friendly DB)
-- [ ] Replace the sample persona with your real content
+- [ ] Add real repo/demo links to each project in `portfolio-data.ts` (cards auto-swap to "Live demo" buttons when `demoUrl ≠ repoUrl`)
 - [ ] Swap in your own résumé PDF
 - [ ] Update `metadata` in `src/app/layout.tsx` (title, description, OG tags)
 

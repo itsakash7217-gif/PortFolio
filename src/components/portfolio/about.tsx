@@ -8,8 +8,8 @@ import { SectionHeading } from "./section-heading"
 const facts = [
   { icon: Globe, label: "Based in", value: profile.location },
   { icon: Mail, label: "Email", value: profile.email },
-  { icon: Coffee, label: "Fuel", value: "Coffee & curiosity" },
-  { icon: Compass, label: "Interests", value: "AI, DX, design systems" },
+  { icon: Coffee, label: "Fuel", value: "Chai & curiosity" },
+  { icon: Compass, label: "Focus", value: "AI, DSA & full-stack" },
 ]
 
 export function About() {

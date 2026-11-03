@@ -22,7 +22,7 @@ export function Footer() {
               aria-label="Back to top"
             >
               <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-violet-600 via-fuchsia-500 to-amber-400 text-xs font-bold text-white">
-                AC
+                {profile.initials}
               </span>
               <span className="font-[family-name:var(--font-space-grotesk)] font-semibold">
                 {profile.name}
