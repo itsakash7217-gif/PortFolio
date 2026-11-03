@@ -78,7 +78,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row">
-          <p>
+          <p suppressHydrationWarning>
             © {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
